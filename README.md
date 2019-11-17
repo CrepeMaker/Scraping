@@ -1,4 +1,4 @@
-# ettyScriping
+# rettyScriping
 
 ## Retty用のスクレイピング(rettyScriping)
 
