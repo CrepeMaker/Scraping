@@ -36,4 +36,3 @@ class"rettyScraping"を用いる。
 - score:1~3の評価値
 - url:url
 - userId:コメントした人のid
-
