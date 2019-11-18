@@ -50,6 +50,9 @@ setup(
     #
     #   py_modules=["my_module"],
     #
+    
+    install_requires=['BeautifulSoup','pandas','requests','json','pprint'],
+    
     packages=find_packages('src'),  # Required
     package_dir={"": "src"},
     python_requires='>=3.5, <4',
