@@ -50,7 +50,7 @@ setup(
     #
     #   py_modules=["my_module"],
     #
-    packages=find_packages('Scraping'),  # Required
+    packages=find_packages('.'),  # Required
     package_dir={"": "Scraping"},
     python_requires='>=3.5, <4',
 
