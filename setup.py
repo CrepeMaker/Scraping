@@ -16,9 +16,7 @@ setup(
     long_description=long_description,  # Optional
     long_description_content_type='text/markdown',  # Optional (see note above)
     author='BDA2019TeaｍA',  # Optional
-    
-    py_modules = ["rettyScraping","tabeLogScraping"],
-
+   
     # Classifiers help users find your project by categorizing it.
     #
     # For a list of valid classifiers, see https://pypi.org/classifiers/
@@ -52,7 +50,7 @@ setup(
     #
     #   py_modules=["my_module"],
     #
-    packages=find_packages('Scraping'),  # Required
+    packages=find_packages('./Scraping'),  # Required
     package_dir={"": "Scraping"},
     python_requires='>=3.5, <4',
 
