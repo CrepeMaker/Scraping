@@ -51,7 +51,7 @@ setup(
     #   py_modules=["my_module"],
     #
     
-    install_requires=['BeautifulSoup4','pandas','requests'],
+    install_requires=['BeautifulSoup3','pandas','requests'],
     
     packages=find_packages('src'),  # Required
     package_dir={"": "src"},
