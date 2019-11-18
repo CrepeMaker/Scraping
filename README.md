@@ -3,7 +3,7 @@
 パッケージインストール
 
 ```
-pip install git+https://github.com/BDA2019TeamA/CrepeDB
+pip install git+https://github.com/BDA2019TeamA/Scraping
 ```
 
 使用方法
