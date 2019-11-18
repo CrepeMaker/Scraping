@@ -1,4 +1,4 @@
-# Scraping
+# Scraping(Retty,食べログ)
 
 ## Retty用のスクレイピング(rettyScraping)
 
