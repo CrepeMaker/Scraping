@@ -14,6 +14,8 @@ retty = rettyScraping()
 tabe = tabeLogScraping()
 ```
 
+### 調子が悪かったらsetup.pyのinstall_requiresの部分を消して手動で必要なライブラリを入れる
+
 
 
 ## Retty用のスクレイピング(rettyScraping)
