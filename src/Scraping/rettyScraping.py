@@ -11,7 +11,7 @@ from pprint import pprint
 
 
 
-class rettyScraping():
+class rettyScraping:
     
     channel = {}
     
