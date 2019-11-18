@@ -1,5 +1,21 @@
 # Scraping(Retty,食べログ)
 
+パッケージインストール
+
+```
+pip install git+https://github.com/BDA2019TeamA/CrepeDB
+```
+
+使用方法
+
+```
+from Scraping import *
+retty = rettyScraping()
+tabe = tabeLogScraping()
+```
+
+
+
 ## Retty用のスクレイピング(rettyScraping)
 
 ### 使用に必要なライブラリ
