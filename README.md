@@ -119,13 +119,14 @@ class `tabeLogScraping` を用いる。
 - phone:電話番号
 - restaurantId:Rettyにおける店id
 - score:0~5の評価値
-個別score
+
 ---
-- 料理・味
-- サービス
-- 雰囲気
-- CP
-- 酒・ドリンク
+###### 個別score
+- 料理・味:0~5の評価値
+- サービス:0~5の評価値
+- 雰囲気:0~5の評価値
+- CP(コスパ):0~5の評価値
+- 酒・ドリンク:0~5の評価値
 ---
 - url:url
 - userId:コメントした人のid
