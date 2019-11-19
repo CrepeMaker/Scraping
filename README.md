@@ -132,4 +132,23 @@ import time
 
 それぞれ実行すると対応するcsvが取得できる
 
+### csvの中身
+#### column(gnavi_comment_Scraping.py)
 
+- '店舗ID'
+- 'URL'
+- '投稿ID'
+- 'ニックネーム'
+- 'コメント'
+- '評価'
+
+#### column(gnavi_restaurant_Scraping.py)
+
+
+- '店舗ID'
+- '店舗名'
+- 'カテゴリー'
+- 'URL'
+- '住所'
+- '電話番号'
+- '地区名小'
