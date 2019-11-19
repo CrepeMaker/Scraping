@@ -1,4 +1,4 @@
-# Scraping(Retty,食べログ)
+# Scraping(Retty,食べログ,ぐるなび)
 
 パッケージインストール
 
@@ -6,7 +6,7 @@
 pip install git+https://github.com/BDA2019TeamA/Scraping
 ```
 
-使用方法
+使用方法(ぐるなびはAPIの都合上不可能)
 
 ```
 from Scraping import *
@@ -15,7 +15,6 @@ tabe = tabeLogScraping()
 ```
 
 ### 調子が悪かったらsetup.pyのinstall_requiresの部分を消して手動で必要なライブラリを入れる
-
 
 
 ## Retty用のスクレイピング(rettyScraping)
@@ -107,5 +106,30 @@ class `tabeLogScraping` を用いる。
 - url:url
 - userId:コメントした人のid
 
+
+## ぐるなび用のスクレイピング()
+
+### 使用に必要なライブラリ
+
+```
+import sys
+import urllib
+import xml.etree.ElementTree as ET
+import json
+import requests
+import csv
+import pandas as pd
+import time
+```
+
+### 使用方法
+
+ぐるなびの[API登録](https://api.gnavi.co.jp/api/use/)をする
+
+gnavi_comment_Scraping.py
+
+gnavi_restaurant_Scraping.py
+
+それぞれ実行すると対応するcsvが取得できる
 
 
