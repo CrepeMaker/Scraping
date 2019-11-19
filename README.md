@@ -126,9 +126,9 @@ import time
 
 ぐるなびの[API登録](https://api.gnavi.co.jp/api/use/)をする
 
-gnavi_comment_Scraping.py
+#### gnavi_comment_Scraping.py
 
-gnavi_restaurant_Scraping.py
+#### gnavi_restaurant_Scraping.py
 
 それぞれ実行すると対応するcsvが取得できる
 
