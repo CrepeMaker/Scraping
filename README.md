@@ -107,7 +107,7 @@ class `tabeLogScraping` を用いる。
 - userId:コメントした人のid
 
 
-## ぐるなび用のスクレイピング()
+## ぐるなび用のスクレイピング(gnavi_comment_Scraping,gnavi_restaurant_Scraping.py)
 
 ### 使用に必要なライブラリ
 
