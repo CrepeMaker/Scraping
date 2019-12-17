@@ -87,11 +87,11 @@ class rettyScraping:
         except Exception:
             name = None
         try:
-            group = compo[0].ul.text.replace("\n",",").replace(" ","")[1:]
+            group = composition[0].ul.text.replace("\n",",").replace(" ","")[1:]
         except Exception:
             grp = None
         try:
-            call = re.search("[0-9]*-[0-9]*-[0-9]*",compo[2].text).group()
+            call = re.search("[0-9]*-[0-9]*-[0-9]*",composition[2].text).group()
         except Exception:
             call = -1
         Url = goto + "reports/"

@@ -56,20 +56,17 @@ class tabeLogScraping:
         
         for i in range(MIN,MAX):
             goto = elems[i].get("href")
-            print(goto)
             html = requests.get(goto)
             soup = BeautifulSoup(html.text.encode(html.encoding))
             elems = soup.find_all("a",href=re.compile(goto+"[a-z]*/"))
             for link in elems:
                 gt = link.get("href")
-                print(gt)
                 html = requests.get(gt)
                 soup = BeautifulSoup(html.text.encode(html.encoding))
                 el = soup.find_all("a",href=re.compile("/"+word+"/A[0-9]*/A[0-9]*/[0-9]*/"))
                 #print(soup)
                 for shop in el:
                     gt = "https://tabelog.com" + shop.get("href")
-                    print(gt)
                     df = self.getRestaurantData(gt,shop.get("href"),df)
                     time.sleep(1)
                 time.sleep(1)
