@@ -17,7 +17,7 @@ tabe = tabeLogScraping()
 ### 調子が悪かったらsetup.pyのinstall_requiresの部分を消して手動で必要なライブラリを入れる
 
 
-## Retty用のスクレイピング(rettyScraping)
+## Retty用の都道府県別スクレイピング(rettyScraping)
 
 ### 使用に必要なライブラリ
 ```
@@ -61,7 +61,7 @@ class `rettyScraping` を用いる。
 
 
 
-## 食べログ用のスクレイピング(tabeLogScraping.py)
+## 食べログ用の都道府県別スクレイピング(tabeLogScraping.py)
 
 ### 使用に必要なライブラリ
 ```
@@ -108,6 +108,71 @@ class `tabeLogScraping` を用いる。
 ---
 - url:url
 - userId:コメントした人のid
+
+
+
+## Retty用の東京都内スクレイピング(rettyScraping)
+
+
+#### retty_restaurantTokyo_Scraping.py
+
+##### 取得できるcsvの中身
+
+- '店舗ID'
+- '店舗名'
+- 'カテゴリー'
+- 'URL'
+- '住所'
+- '電話番号'
+- '地区名小'
+
+
+#### retty_commentTokyo_Scraping.py
+
+##### 取得できるcsvの中身
+
+- '店舗ID'
+- 'URL'
+- '投稿ID'
+- 'ニックネーム'
+- 'コメント'
+- '評価'
+
+
+
+
+## 食べログ用の東京都内スクレイピング(tabeLogScraping.py)
+
+#### tabeLog_restaurantTokyo_Scraping.py
+
+##### 取得できるcsvの中身
+
+- '店舗ID'
+- '店舗名'
+- 'カテゴリー'
+- 'URL'
+- '住所'
+- '電話番号'
+- '地区名小'
+
+
+#### tabeLog_commentTokyo_Scraping.py
+
+
+- '店舗ID'
+- 'URL'
+- '投稿ID'
+- 'ニックネーム'
+- 'コメント'
+- '評価'
+- '料理・味'
+- 'サービス'
+- '雰囲気'
+- 'CP(コスパ)'
+- '酒・ドリンク'
+
+
+
 
 
 ## ぐるなび用のスクレイピング(gnavi_comment_Scraping,gnavi_restaurant_Scraping.py)
