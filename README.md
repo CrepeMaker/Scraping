@@ -1,6 +1,6 @@
 # Scraping(Retty,食べログ,ぐるなび)
 
-パッケージインストール
+パッケージインストール(対応:tabeLogScraping.py rettyScraping.py)
 
 ```
 pip install git+https://github.com/BDA2019TeamA/Scraping
