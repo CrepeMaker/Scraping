@@ -38,6 +38,7 @@ class retty_restraurant():
         elems = soup.find_all(href=re.compile(url+"page-[0-9]{1,6}/"))
         MAX = int(elems[-1].text)
         for i in range(MAX):
+            print("---{0} / {1}---".format(i+1,MAX))
             goto = url + "page-" + str(i+1)+"/"
             html = requests.get(goto)
             soup = BeautifulSoup(html.text.encode(html.encoding))

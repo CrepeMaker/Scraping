@@ -35,20 +35,29 @@ class tabeLog_restraurant():
 
         html = requests.get(url)
         soup = BeautifulSoup(html.text.encode(html.encoding))
-        elems = soup.find_all("span",class_=re.compile("c-page-count__num"))
-        MAX = int(elems[2].text)
-        for i in range(-(-MAX//20)):
-            num = i + 1
-            html = requests.get(url+str(num)+"/")
+
+        elemm = soup.find_all("a",class_=re.compile("c-link-arrow"))
+        for ii in range(len(elemm)):
+            url = elemm[ii].get("href")
+            html = requests.get(url)
             soup = BeautifulSoup(html.text.encode(html.encoding))
-            elems = soup.find_all(class_=re.compile("list-rst__rst-name-target cpy-rst-name"))
-            for link in elems:
-                gt = link.get("href")
-                print(gt)
-                df,df2 = self.getRestaurantData(gt,df,df2,name)
+            elems = soup.find_all("span",class_=re.compile("c-page-count__num"))
+            MAX = int(elems[2].text)
+            for i in range(-(-MAX//20)):
+                num = i + 1
+                print("---{0} / {1}---".format(i+1,-(-MAX//20)))
+                html = requests.get(url+str(num)+"/")
+                soup = BeautifulSoup(html.text.encode(html.encoding))
+                elems = soup.find_all(class_=re.compile("list-rst__rst-name-target cpy-rst-name"))
+                for link in elems:
+                    gt = link.get("href")
+                    print(gt)
+                    df,df2 = self.getRestaurantData(gt,df,df2,name)
+                    time.sleep(1)
                 time.sleep(1)
             time.sleep(1)
         
+
         df.to_csv("T_restraurant_"+name+".csv")
         df2.to_csv("T_PRE"+name+".csv")
         print("--end--")
