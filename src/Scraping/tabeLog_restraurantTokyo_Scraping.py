@@ -34,29 +34,32 @@ class tabeLog_restraurant():
             print("存在しない市区町村")
 
         html = requests.get(url)
-        soup = BeautifulSoup(html.text.encode(html.encoding))
+        soup = BeautifulSoup(html.text.encode(html.encoding), features="lxml")
 
         elemm = soup.find_all("a",class_=re.compile("c-link-arrow"))
         for ii in range(len(elemm)):
             url = elemm[ii].get("href")
+            print(url)
             html = requests.get(url)
-            soup = BeautifulSoup(html.text.encode(html.encoding))
+            soup = BeautifulSoup(html.text.encode(html.encoding), features="lxml")
             elems = soup.find_all("span",class_=re.compile("c-page-count__num"))
             MAX = int(elems[2].text)
             for i in range(-(-MAX//20)):
                 num = i + 1
                 print("---{0} / {1}---".format(i+1,-(-MAX//20)))
                 html = requests.get(url+str(num)+"/")
-                soup = BeautifulSoup(html.text.encode(html.encoding))
+                soup = BeautifulSoup(html.text.encode(html.encoding), features="lxml")
                 elems = soup.find_all(class_=re.compile("list-rst__rst-name-target cpy-rst-name"))
                 for link in elems:
                     gt = link.get("href")
                     print(gt)
                     df,df2 = self.getRestaurantData(gt,df,df2,name)
                     time.sleep(1)
+                break
                 time.sleep(1)
+            break
             time.sleep(1)
-        
+
 
         df.to_csv("T_restraurant_"+name+".csv")
         df2.to_csv("T_PRE"+name+".csv")
@@ -67,15 +70,18 @@ class tabeLog_restraurant():
         data2 = {}
 
         Ht = requests.get(goto)
-        soup = BeautifulSoup(Ht.text.encode(Ht.encoding))
-        elems_b = soup.find_all("span",class_ = re.compile("rstdtl-navi__total-count"))
+        soup = BeautifulSoup(Ht.text.encode(Ht.encoding), features="lxml")
+
+        review_link = soup.find(id="rdnavi-review")
+        review_link_badge = review_link.find(class_ = re.compile("rstdtl-navi__total-count"))
 
         adl = soup.find_all("p",class_ = re.compile("rstinfo-table__address"))
 
-        try:
-            k_num = elems_b[0].text
-        except Exception:
+        if review_link_badge:
+            k_num = review_link_badge.text
+        else:
             k_num = 0
+
         composition = soup.find_all("table",class_=re.compile("c-table c-table--form rstinfo-table__table"))
         na = soup.find_all("h2",class_=re.compile("display-name"))
         try:
@@ -97,7 +103,7 @@ class tabeLog_restraurant():
                 strings += adl[i].text
         except Exception:
             strings = None
-        
+
         data["店舗ID"] = re.findall(r'/[0-9]+/',goto)[0][1:-1]
         data["店舗名"] = name
         data["カテゴリー"] = group.replace("\n","")
