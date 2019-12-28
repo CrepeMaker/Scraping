@@ -25,6 +25,12 @@ class tabeLog_comment():
         for dt in data:
             self.channel[dt[0]] = dt[1]
 
+    def getOneComment(self,url):
+        Ht = requests.get(url)
+        soup = BeautifulSoup(Ht.content, 'lxml')
+        comment = soup.find_all("div",class_=re.compile("rvw-item__rvw-comment"))
+        return comment[0].text
+
     
     def getComment(self,name):
 
@@ -44,26 +50,30 @@ class tabeLog_comment():
                 data = {}
                 if row[0] == "":
                     continue
-                data["店舗ID"] = row[0]
+                data["店舗ID"] = row[3]
                 size = row[2]
                 for i in range(-(-int(size)//20)):
+                    print("---{0}/{1}---".format(i+1,-(-int(size)//20)))
                     Ht = requests.get(row[1] + "dtlrvwlst/COND-0/smp1/?smp=1&lc=0&rvw_part=all&PG=" + str(i+1) + "/")
-                    data["URL"] = row[1] + "dtlrvwlst/COND-0/smp1/?smp=1&lc=0&rvw_part=all&PG=" + str(i+1) + "/"
-                    soup = BeautifulSoup(Ht.text.encode(Ht.encoding), 'html.parser')
+                    soup = BeautifulSoup(Ht.content, 'lxml')
+
                     elems_n = soup.find_all("div",class_=re.compile("rvw-item js-rvw-item-clickable-area"))
+
                     for link in elems_n:
                         all_score = link.find_all("b",class_=re.compile("c-rating__val c-rating__val--strong"))
                         data["評価"] = all_score[0].text
                         userId = link.find_all("a",target=re.compile("_blank"))[0]
-                        print(userId.get("href"))
                         data["投稿ID"] = userId.get("href")[6:-1]
-                        comment = link.find_all("div",class_=re.compile("rvw-item__rvw-comment"))
-                        data["コメント"] = comment[0].text
+                        tourl = "https://tabelog.com"+link.get("data-detail-url")
+                        data["URL"] = tourl
+                        data["コメント"] = self.getOneComment(tourl)
                         kkk = link.find_all("strong",class_=re.compile("rvw-item__ratings-dtlscore-score"))
                         for i in range(len(self.score)):
                             data[self.score[i]] = kkk[i].text.strip().replace("\n","")
                         df = df.append(copy.deepcopy(data), ignore_index=True)
+                        time.sleep(1)
                     time.sleep(1)
+                time.sleep(1)
         df.to_csv("T_comment_"+name+".csv")
         print("--end--")
 

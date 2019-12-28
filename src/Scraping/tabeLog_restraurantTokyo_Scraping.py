@@ -37,12 +37,15 @@ class tabeLog_restraurant():
         soup = BeautifulSoup(html.text.encode(html.encoding))
 
         elemm = soup.find_all("a",class_=re.compile("c-link-arrow"))
+        ro = 0
         for ii in range(len(elemm)):
             url = elemm[ii].get("href")
             html = requests.get(url)
             soup = BeautifulSoup(html.text.encode(html.encoding))
             elems = soup.find_all("span",class_=re.compile("c-page-count__num"))
             MAX = int(elems[2].text)
+            ro += MAX
+            print(ro)
             for i in range(-(-MAX//20)):
                 num = i + 1
                 print("---{0} / {1}---".format(i+1,-(-MAX//20)))
@@ -56,8 +59,6 @@ class tabeLog_restraurant():
                     time.sleep(1)
                 time.sleep(1)
             time.sleep(1)
-        
-
         df.to_csv("T_restraurant_"+name+".csv")
         df2.to_csv("T_PRE"+name+".csv")
         print("--end--")
@@ -65,6 +66,7 @@ class tabeLog_restraurant():
     def getRestaurantData(self,goto,df,df2,where):
         data = {}
         data2 = {}
+        
 
         Ht = requests.get(goto)
         soup = BeautifulSoup(Ht.text.encode(Ht.encoding))
@@ -84,8 +86,13 @@ class tabeLog_restraurant():
             name = None
         try:
             group = composition[0].find_all("td")[1].text
+            th = composition[0].find_all("th")
+            for tt in range(len(th)):
+                if th[tt].text == "ジャンル":
+                    group = composition[0].find_all("td")[tt].text
+                    break
         except Exception:
-            grp = None
+            group = None
         try:
             call = soup.find_all("strong",class_=re.compile("rstinfo-table__tel-num"))[0].text
         except Exception:
