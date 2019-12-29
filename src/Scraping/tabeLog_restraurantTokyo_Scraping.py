@@ -68,7 +68,7 @@ class tabeLog_restraurant():
                 time.sleep(1)
             time.sleep(1)
 
-            bar.close()
+            bar.finish()
 
         df.to_csv("T_restraurant_"+name+".csv")
         df2.to_csv("T_PRE"+name+".csv")
