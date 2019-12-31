@@ -27,15 +27,16 @@ class tabeLog_comment():
             self.channel[dt[0]] = dt[1]
 
     def getOneComment(self,url):
-        Ht = requests.get(url)
-        soup = BeautifulSoup(Ht.content, 'lxml')
-        comment = soup.find_all("div",class_=re.compile("rvw-item__rvw-comment"))
-        return comment[0].text
+        try:
+            Ht = requests.get(url)
+            soup = BeautifulSoup(Ht.content, 'lxml')
+            comment = soup.find_all("div",class_=re.compile("rvw-item__rvw-comment"))
+            return comment[0].text
+        except Exception:
+            return "Error:Nothing"
 
 
     def getComment(self,name):
-
-        df = pandas.DataFrame()
 
         if self.channel.get(name):
             url = self.channel[name]
@@ -62,8 +63,10 @@ class tabeLog_comment():
 
         with open(csv_path) as f:
             reader = csv.reader(f)
+            flag = True
             for row in reader:
                 data = {}
+                df = pandas.DataFrame()
                 if row[0] == "":
                     continue
                 data["店舗ID"] = row[3]
@@ -76,17 +79,27 @@ class tabeLog_comment():
 
                     for link in elems_n:
                         all_score = link.find_all("b",class_=re.compile("c-rating__val c-rating__val--strong"))
-                        data["評価"] = all_score[0].text
+                        try:
+                            data["評価"] = all_score[0].text
+                        except Exception:
+                            data["評価"] = "-1"
                         userId = link.find_all("a",target=re.compile("_blank"))[0]
-                        #print(userId.get("href"))
-                        data["投稿ID"] = userId.get("href")[6:-1]
+                        try:
+                            data["投稿ID"] = userId.get("href")[6:-1]
+                        except Exception:
+                            data["投稿ID"] = "-1"
                         tourl = "https://tabelog.com"+link.get("data-detail-url")
                         data["URL"] = tourl
                         data["コメント"] = self.getOneComment(tourl)
                         kkk = link.find_all("strong",class_=re.compile("rvw-item__ratings-dtlscore-score"))
                         for i in range(len(self.score)):
-                            data[self.score[i]] = kkk[i].text.strip().replace("\n","")
-                        #print(data)
+                            try:
+                                data[self.score[i]] = kkk[i].text.strip().replace("\n","")
+                            except Exception:
+                                data[self.score[i]] = "-1"
+
+                        data["ID"] = int(bar_val)
+
                         df = df.append(copy.deepcopy(data), ignore_index=True)
 
                         bar_val += 1
@@ -94,11 +107,17 @@ class tabeLog_comment():
 
                         time.sleep(1)
                     time.sleep(1)
+                try:
+                    df = df.set_index('ID')
+                except Exception:
+                    continue
+                if flag:
+                    df.to_csv("T_comment_"+name+".csv")
+                    flag = False
+                else:
+                    df.to_csv("T_comment_"+name+".csv", mode='a', header=False)
                 time.sleep(1)
-
         bar.finish()
-
-        df.to_csv("T_comment_"+name+".csv")
         #print("--end--")
 
 
