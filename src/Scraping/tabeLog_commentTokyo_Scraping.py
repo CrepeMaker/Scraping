@@ -30,8 +30,11 @@ class tabeLog_comment():
         try:
             Ht = requests.get(url)
             soup = BeautifulSoup(Ht.content, 'lxml')
-            comment = soup.find_all("div",class_=re.compile("rvw-item__rvw-comment"))
-            return comment[0].text
+            comment = soup.find_all("div",class_=re.compile("rvw-item__rvw-comment"))[0]
+            for br in soup.find_all('br'):
+                br.replace_with('\n')
+
+            return comment.text
         except Exception:
             return "Error:Nothing"
 
