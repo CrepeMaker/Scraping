@@ -16,7 +16,6 @@ tabe = tabeLogScraping()
 
 ### 調子が悪かったらsetup.pyのinstall_requiresの部分を消して手動で必要なライブラリを入れる
 
-
 ## Retty用の都道府県別スクレイピング(rettyScraping)
 
 ### 使用に必要なライブラリ
@@ -60,7 +59,6 @@ class `rettyScraping` を用いる。
 - userId:コメントした人のid
 
 
-
 ## 食べログ用の都道府県別スクレイピング(tabeLogScraping.py)
 
 ### 使用に必要なライブラリ
@@ -73,11 +71,13 @@ import time
 import ast
 import json
 import copy
+import os
+import csv
+import sys
 from pprint import pprint
 ```
 
 ### 使用方法
-
 
 class `tabeLogScraping` を用いる。
 
@@ -85,8 +85,7 @@ class `tabeLogScraping` を用いる。
 
 引数は `都道府県名(str)`, `どこから(int)`, `どこまで(int)`, `csv名/None(追記する時、ないときはNone)`
 
-
-出力されるcsv名は追記でない限り`AREA{都道府県のローマ字}.csv`となっている。
+出力されるcsv名は追記を行わない限り`AREA{都道府県のローマ字}.csv`となっている。
 
 ### csvの中身
 #### column
